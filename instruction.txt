@@ -1,0 +1,21 @@
+Run Bedrock inference, create powerpoint, save it in s3
+
+Setup Lambda function.
+ - From configuration tab, click lambda role to open IAM page, add bedrock/s3 permission to this role.
+   Add cloudwatchlogs permission too.
+ - Increase timeout duration from configuration tab, under general configuration.
+ - Add trigger.  Choose API gateway.  Choose HTTP API. 
+   Choose Open or IAM for Security. If you choose Open, setup WAF to only allow specific IP.
+ - run "pip install python-pptx -t ." Put everything inside /python folder, and .zip the python folder.
+ - Open lambda from console, click Layers, create layer to add the zip file.
+ - In the lambda function, add the layer using ARN address. 
+ (Note pptx also needs Pandas and Pillow libraries. If import errors, try below ARN)
+
+(You may need to add 3rd party ARN)
+Add the following layer.
+1. pptx from your zip file.
+2. AWSSDKPandas-Python310  (This is from AWS layer)
+3. Klayers-p310-Pillow  (https://github.com/keithrozario/Klayers?tab=readme-ov-file)
+
+You could also get Pandas from here. https://aws-sdk-pandas.readthedocs.io/en/stable/layers.html
+Powerpoint template available from here. https://create.microsoft.com/en-us/search?query=PowerPoint
