@@ -3,6 +3,7 @@ import json
 import requests
 #from requests_auth_aws_sigv4 import AWSSigV4
 
+# For parsing documents like PDF, use Docling library, then use it through prompt.
 # If using IAM role, attach AmazonAPIGatewayInvokeFullAccess policy.
 # If API is set OPEN, use WAF to only allow specific IP.
 
